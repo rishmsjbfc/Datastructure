@@ -35,31 +35,31 @@ function mostDigits(nums)
 // console.log(digitCountString(10005))
 // console.log(digitCount(10005))
 // console.log(mostDigits([83,92392,294992,22,3903932901]))
-function radixSort(arr)
+function radixSort(arr)//O(nk) Time Complexity for worst case, best case and average case
 {
     let maxDigit = mostDigits(arr);
     let bucket=new Array();
-    for(let l =0;l<10;l++)
-        bucket[l] = new Array();
+    // for(let l =0;l<10;l++)
+    //     bucket[l] = new Array();
     for(let i=0;i<maxDigit;i++)
     {
+        bucket = Array.from({length:10},()=>[]);
         for(let j=0;j<arr.length;j++)
         {
             let digit = getDigit(arr[j],i);
             bucket[digit].push(arr[j]);
         }
-        // console.log(bucket)
-        arr=[];
-        for(let k=0;k<10;k++)
-        {
-            let count = 0;
-            while(bucket[k][count]!==undefined)
-            {
-                arr.push(bucket[k][count])
-                count++;
-            }
-            bucket[k]=[];
-        }
+        arr=[].concat(...bucket);
+        // for(let k=0;k<10;k++)
+        // {
+        //     let count = 0;
+        //     while(bucket[k][count]!==undefined)
+        //     {
+        //         arr.push(bucket[k][count])
+        //         count++;
+        //     }
+        //     bucket[k]=[];
+        // }
     }
     return arr;
 }
